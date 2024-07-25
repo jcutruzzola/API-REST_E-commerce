@@ -22,7 +22,7 @@ class ProductManager {
 
     }
 
-    async addProduct({ title, description, price, img, code, stock }) {
+    async addProduct({ title, description, price, img, code, stock, category }) {
 
         if (!title || !description || !price || !img || !code || !stock) {
             console.log("Todos los campos son obligatorios");
@@ -44,7 +44,8 @@ class ProductManager {
             price,
             img,
             code,
-            stock
+            stock,
+            category
         }
 
         //4) Metemos el producto al array. 

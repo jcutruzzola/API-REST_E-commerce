@@ -6,7 +6,8 @@
     "price": 500,
     "img": "sin imagen",
     "code": "ghi012",
-    "stock": 20
+    "stock": 20,
+    "category": "alimentos"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "price": 300,
     "img": "sin imagen",
     "code": "abc123",
-    "stock": 25
+    "stock": 25,
+    "category": "alimentos"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "price": 150,
     "img": "sin imagen",
     "code": "def456",
-    "stock": 40
+    "stock": 40,
+    "category": "alimentos"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "price": 200,
     "img": "sin imagen",
     "code": "ghi789",
-    "stock": 30
+    "stock": 30,
+    "category": "alimentos"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "price": 120,
     "img": "sin imagen",
     "code": "jkl012",
-    "stock": 35
+    "stock": 35,
+    "category": "alimentos"
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "price": 70,
     "img": "sin imagen",
     "code": "mno345",
-    "stock": 45
+    "stock": 45,
+    "category": "alimentos"
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "price": 180,
     "img": "sin imagen",
     "code": "pqr678",
-    "stock": 25
+    "stock": 25,
+    "category": "alimentos"
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "price": 80,
     "img": "sin imagen",
     "code": "stu901",
-    "stock": 50
+    "stock": 50,
+    "category": "alimentos"
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "price": 250,
     "img": "sin imagen",
     "code": "vwx234",
-    "stock": 20
+    "stock": 20,
+    "category": "alimentos"
   },
   {
     "id": 10,
@@ -87,6 +96,7 @@
     "price": 100,
     "img": "sin imagen",
     "code": "yz5678",
-    "stock": 60
+    "stock": 60,
+    "category": "alimentos"
   }
 ]
