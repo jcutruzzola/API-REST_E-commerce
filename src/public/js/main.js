@@ -12,6 +12,7 @@ socket.on("productos", (data) => {
 const productsRender = products => {
     const productsContainer = document.getElementById("products-container");
     productsContainer.innerHTML = "";
+    productsContainer.classList = "container-fluid"
 
     products.forEach(item => {
         const card = document.createElement("div");
@@ -53,8 +54,25 @@ const deleteProduct = (id) => {
 }
 
 
-/*   <p> ${item.id} </p>
-                            <p> ${item.title} </p>
-                            <p> ${item.description} </p>
-                            <p> ${item.price} </p>
-                            <button> Eliminar </button> */
+
+const form = document.getElementById("add-products-form");
+
+form.addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    let title = document.getElementById("product-input").value;
+    let description = document.getElementById("product-description").value;
+    let price = document.getElementById("product-price").value;
+    let code = document.getElementById("product-code").value;
+    let stock = document.getElementById("product-stock").value;
+    let img = document.getElementById("product-img").value;
+    let category = document.getElementById("product-category").value;
+
+
+     e ? socket.emit("newProduct", { title, description, price, code, stock, img, category }) : console.log("Faltan datos en alguno de los campos");
+     
+
+     form.reset();
+})
+

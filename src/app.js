@@ -47,7 +47,14 @@ io.on("connection", async (socket) => {
 
     io.sockets.emit("productos", await manager.getProducts());
 
+    })
 
+
+    socket.on("newProduct", async(data) => {
+        const { title, description, price, code, stock, img, category } = data;
+        await manager.addProduct(data)
+
+        io.sockets.emit("productos", await manager.getProducts());
     })
     
 })
