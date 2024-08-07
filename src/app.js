@@ -1,18 +1,53 @@
 const express = require("express"); 
-const productRouter = require("./routes/products.router.js");
 const app = express(); 
 const PUERTO = 8080;
+const ProductManager = require("./managers/product-manager.js");
+const manager = new ProductManager("./src/data/productos.json");
+const productRouter = require("./routes/products.router.js");
 const cartRouter = require("./routes/carts.router.js");
-const CartManager = require("./managers/cart-manager.js");
+const viewsRouter = require("./routes/views.router.js");
+const realTimeProductsRouter = require("./routes/realTimeProducts.router.js");
+const exphbs = require("express-handlebars");
+const socket = require("socket.io")
+
+
+// Handlebars
+
+app.engine("handlebars", exphbs.engine());
+app.set("view engine", "handlebars");
+app.set("views", "./src/views");
 
 //Middleware: 
 app.use(express.json());  
+app.use(express.static("./src/public"));
+
+
 
 //Rutas
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter)
+app.use("/", viewsRouter);
+app.use("/", realTimeProductsRouter);
 
 
-app.listen(PUERTO, () => {
+const httpServer = app.listen(PUERTO, () => {
     console.log(`Escuchando en el http://localhost:${PUERTO}`); 
+})
+
+const io = socket(httpServer);
+
+io.on("connection", async (socket) => {
+    console.log("conectado ok");
+
+    socket.emit("productos", await manager.getProducts());
+
+    socket.on("deleteProduct", async (id) => {
+        await manager.deleteProduct(id)
+
+
+    io.sockets.emit("productos", await manager.getProducts());
+
+
+    })
+    
 })

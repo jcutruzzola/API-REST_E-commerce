@@ -1,15 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Café",
-    "description": "Nescafé",
-    "price": 500,
-    "img": "sin imagen",
-    "code": "ghi012",
-    "stock": 20,
-    "category": "alimentos"
-  },
-  {
     "id": 2,
     "title": "Cereal",
     "description": "Kellogg's",
