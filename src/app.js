@@ -1,14 +1,17 @@
 const express = require("express"); 
 const app = express(); 
 const PUERTO = 8080;
-const ProductManager = require("./managers/product-manager.js");
-const manager = new ProductManager("./src/data/productos.json");
+const ProductManager = require("./dao/db/product-mananger-db.js");
+const manager = new ProductManager();
 const productRouter = require("./routes/products.router.js");
 const cartRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const realTimeProductsRouter = require("./routes/realTimeProducts.router.js");
 const exphbs = require("express-handlebars");
-const socket = require("socket.io")
+const socket = require("socket.io");
+require ("./database.js");
+
+
 
 
 // Handlebars
@@ -20,6 +23,7 @@ app.set("views", "./src/views");
 //Middleware: 
 app.use(express.json());  
 app.use(express.static("./src/public"));
+app.use(express.urlencoded( {extended: true}));
 
 
 

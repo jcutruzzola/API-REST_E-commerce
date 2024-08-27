@@ -2,7 +2,7 @@ const socket = io();
 
 
 socket.on("productos", (data) => {
-    console.log(data);
+    // console.log(data);
 
     productsRender(data);
 

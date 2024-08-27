@@ -1,0 +1,152 @@
+[
+    {
+      "title": "Camiseta Básica",
+      "description": "Camiseta de algodón 100% en varios colores.",
+      "price": 1500,
+      "img": "sin imagen",
+      "code": "cam001",
+      "stock": 40,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Jeans Clásicos",
+      "description": "Jeans de corte regular con bolsillos delanteros y traseros.",
+      "price": 3500,
+      "img": "sin imagen",
+      "code": "jeans001",
+      "stock": 25,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Vestido Floral",
+      "description": "Vestido de verano con estampado floral y tirantes ajustables.",
+      "price": 2500,
+      "img": "sin imagen",
+      "code": "vestido001",
+      "stock": 15,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Perfume Floral",
+      "description": "Perfume con fragancia floral suave.",
+      "price": 4200,
+      "img": "sin imagen",
+      "code": "perfume001",
+      "stock": 30,
+      "category": "perfume",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Perfume Amaderado",
+      "description": "Perfume con notas de madera y especias.",
+      "price": 4800,
+      "img": "sin imagen",
+      "code": "perfume002",
+      "stock": 20,
+      "category": "perfume",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Cazadora de Cuero",
+      "description": "Cazadora de cuero genuino con forro interior.",
+      "price": 12000,
+      "img": "sin imagen",
+      "code": "caz001",
+      "stock": 10,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Sudadera con Capucha",
+      "description": "Sudadera con capucha y bolsillo delantero.",
+      "price": 3200,
+      "img": "sin imagen",
+      "code": "sud001",
+      "stock": 35,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Falda Plisada",
+      "description": "Falda plisada de largo medio en color negro.",
+      "price": 2000,
+      "img": "sin imagen",
+      "code": "falda001",
+      "stock": 18,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Traje Formal",
+      "description": "Traje de dos piezas para hombre, corte slim.",
+      "price": 15000,
+      "img": "sin imagen",
+      "code": "traje001",
+      "stock": 8,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Perfume Cítrico",
+      "description": "Perfume con notas de cítricos frescos.",
+      "price": 4000,
+      "img": "sin imagen",
+      "code": "perfume003",
+      "stock": 25,
+      "category": "perfume",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Polo Deportivo",
+      "description": "Polo deportivo de secado rápido.",
+      "price": 2500,
+      "img": "sin imagen",
+      "code": "polo001",
+      "stock": 30,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Pantalones de Vestir",
+      "description": "Pantalones de vestir de corte clásico.",
+      "price": 4000,
+      "img": "sin imagen",
+      "code": "pant001",
+      "stock": 22,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Perfume Dulce",
+      "description": "Perfume con fragancia dulce y notas de vainilla.",
+      "price": 4500,
+      "img": "sin imagen",
+      "code": "perfume004",
+      "stock": 20,
+      "category": "perfume",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Camisa de Vestir",
+      "description": "Camisa de vestir de manga larga, corte entallado.",
+      "price": 3500,
+      "img": "sin imagen",
+      "code": "camisa001",
+      "stock": 28,
+      "category": "ropa",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    },
+    {
+      "title": "Perfume Fresco",
+      "description": "Perfume con fragancia fresca y ligera.",
+      "price": 4100,
+      "img": "sin imagen",
+      "code": "perfume005",
+      "stock": 35,
+      "category": "perfume",
+      "thumbnails": ["thumb1.jpg", "thumb2.jpg"]
+    }
+  ]
