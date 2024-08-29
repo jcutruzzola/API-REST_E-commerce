@@ -2,7 +2,6 @@
 const ProductModel = require("../models/product.model.js");
 
 
-
 class ProductManager {
     
 
@@ -45,13 +44,26 @@ class ProductManager {
         }
     }
 
+    async getProducts(limit = null, page = null, sortOrder = null) {
 
-    async getProducts() {
+        
         try {
-            const productsArray = await ProductModel.find(); 
+            const options = {};
+
+            limit ? options.limit = limit : options.limit = 1000;
+
+            page ? options.page = page : null;
+
+            if(sortOrder) {
+                options.sort = { price: sortOrder };
+            }
+
+            const productsArray = await ProductModel.paginate({}, options);
             return productsArray;
+
         } catch (error) {
             console.log("Error al obtener los productos", error);
+            return null;
 
         }
 

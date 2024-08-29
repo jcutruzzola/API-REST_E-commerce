@@ -1,15 +1,35 @@
-<h1>Handlebars Funcionando</h1>
+<h1>Tienda de ropa</h1>
 
-<h1>Mis productos</h1>
+<h2>Listado de productos</h2>
 
-<div class="containerProducts">
+<div class="containerProducts d-flex flex-column ">
+    
     {{#each products}}
-        <div class="card">
+
+        <div class="card" style="width: 18rem">
 
             <p> {{this.title}} </p>
             <p> {{this.description}} </p>
             <p> {{this.price}} </p>
+            <button type="button" class="btn btn-primary btn-sm"> Agregar al Carrito </button>
 
         </div>
+
     {{/each}}
+
+
+    {{#if hasPrevPage}}
+        <a href="/productos?page={{prevPage}}"> Anterior </a>
+    {{/if}}
+
+
+    {{#if hasNextPage}}
+
+    <a href="/productos?page={{nextPage}}"> Siguiente </a>
+
+    {{/if}}
+
+
+<p> {{currentPage}} de {{totalPages}}</p>
+
 </div>

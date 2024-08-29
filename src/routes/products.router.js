@@ -5,10 +5,49 @@ const router = express.Router();
 
 //Listar todos los productos
 
+
 router.get("/", async (req, res) => {
-    const limit = req.query.limit;
+    
+
     try {
+
+        const limit = parseInt(req.query.limit) || null;
+        const page = parseInt(req.query.page) || null;
+        const orderQuery = req.query.sort;
+
+        const sortOrder = orderQuery === "asc" ? 1 : (orderQuery === "des" ? -1 : null);
+
+        const productsArray = await manager.getProducts(limit, page, sortOrder);
+
+
+        res.send({
+
+            result: "succes",                //productsArray ?  "success" : "error",
+            payload: productsArray.docs,
+            totalPages: productsArray.totalPages,
+            prevPage: productsArray.prevPage,
+            nextPage: productsArray.nextPage,
+            page: productsArray.page,
+            hasPrevPage: productsArray.hasPrevPage,
+            hasNextPage: productsArray.hasNextPage,
+            prevLink: productsArray.prevLink = productsArray.hasPrevPage ? `http://localhost:8080/?page=${productsArray.prevPage}` : null,
+            nextLink: productsArray.nextLink = productsArray.hasNextPage ? `http://localhost:8080/?page=${productsArray.nextPage}` : null,
+
+        });
+
+    } catch (error) {
+        res.status(500).send("Error del servidor");  
+    }
+ 
+});
+
+
+
+/* 
+  try {
+
         const arrayProducts = await manager.getProducts();
+
         if (limit) {
             res.send(arrayProducts.slice(0, limit));
         } else {
@@ -17,7 +56,13 @@ router.get("/", async (req, res) => {
     } catch (error) {
         res.status(500).send("Error del servidor");
     }
-})
+
+
+*/
+
+
+
+
 
 //Buscar por id
 
