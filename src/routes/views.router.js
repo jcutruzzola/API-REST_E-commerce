@@ -39,14 +39,26 @@ router.get("/productos", async (req, res) => {
 
 router.get("/carts/:cid", async (req, res) => {
 
-    const cartId = req.params.cid
-    const cart = await CartModel.findById(cartId);
+    const cartId = req.params.cid;
 
-    res.render("carts", { cart } );
+    try {
+        const cart = await CartModel.findById(cartId).populate("products.product").lean();
 
+        // console.log(JSON.stringify(cart, null, 2));
 
+        if (cart) {
+            res.render("carts", { cart: cart });
 
-})
+        } else {
+            console.log("No hay carrito");
+            res.status(404).send("Carrito no encontrado");
+        }
+    } catch (error) {
+
+        console.error("Error al buscar el carrito:", error);
+        res.status(500).send("Error interno del servidor");
+    }
+});
 
 module.exports = router;
 

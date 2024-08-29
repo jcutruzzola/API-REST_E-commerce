@@ -30,10 +30,12 @@ class CartManager {
             const cart = await CartModel.findById(cartId);
 
             if(!cart) {
+
                 console.log("No existe el cart buscado");
                 return null
             }
-            return cart;
+
+            return cart.populate("products.product");
 
         } catch (error) {
             console.log("Error al obtener carrito por id");
@@ -57,9 +59,7 @@ class CartManager {
                 cart.products.push({product: productId, quantity});
             }
 
-
             cart.markModified("products");
-
             await cart.save();
             return cart;
 

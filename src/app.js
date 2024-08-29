@@ -12,19 +12,16 @@ const socket = require("socket.io");
 require ("./database.js");
 
 
-
-
 // Handlebars
-
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
+
 
 //Middleware
 app.use(express.json());  
 app.use(express.static("./src/public"));
 app.use(express.urlencoded( {extended: true}));
-
 
 
 //Rutas

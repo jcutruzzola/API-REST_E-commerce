@@ -21,21 +21,21 @@ router.post("/", async (req, res) => {
 })
 
 
-// Listar products de un carrito
+// Listar products de un carrito por id
 
 router.get("/:cid", async (req, res) => {
     const cartId = req.params.cid;
 
     try {
+
         const cart = await cartManager.getCartById(cartId);
+
         res.json(cart.products);
 
 
     } catch (error){
         res.status(500).send("Error al obtener los productos del carrito por id")
-
     }
-
 })
 
 // agregar productos al carrito
@@ -54,8 +54,6 @@ router.post("/:cid/product/:pid", async (req, res) => {
 
     }
 })
-
-//Faltan put y delete
 
 
 /* 
@@ -77,6 +75,7 @@ router.delete("/:cid", async (req,res) => {
         res.status(500).send("No se pudo eliminar el carrito");
     }
 });
+
 
  */
 
