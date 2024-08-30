@@ -102,6 +102,29 @@ router.delete("/:cid", async (req, res) => {
 
 })
 
+
+// Borrar producto por ID en un carrito
+
+router.delete("/:cid/products/:pid", async (req, res) => {
+
+    const cartId = req.params.cid;
+    const productId = req.params.pid;
+
+    try {
+
+        await cartManager.deleteProductByIdFromCart(cartId, productId);
+
+        res.status(400).send(`Producto con el id ${productId}, eliminado correctamente del carrito id: ${cartId}`);
+        
+
+    } catch (error) {
+
+        res.status(500).send("No se pudo eliminar el producto del carrito seleccionado");
+
+    }
+
+})
+
 // Actualizar cantidad de productos dentro del carrito
 
 

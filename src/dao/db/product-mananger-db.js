@@ -105,6 +105,9 @@ class ProductManager {
         }
     }
 
+
+    // Borrar producto
+    
     async deleteProduct(id) {
         try {
 

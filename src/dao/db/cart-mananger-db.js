@@ -118,7 +118,6 @@ class CartManager {
 
         }
 
-
     async updateProductQuantityByCart(cartId, updatedProductId, quantity) {
 
         try {
@@ -147,6 +146,39 @@ class CartManager {
             console.log("Error al actualizar producto", error);
             throw error;
  
+        }
+    }
+
+
+
+    async deleteProductByIdFromCart(cartId, productId) {
+
+        try {
+            
+            const cart = await this.getCartById(cartId);
+            if(!cart) {
+                console.log("Carrito no disponible");
+                return null;
+            }
+
+            const productToDelete = cart.products.findIndex(i => i.product._id.equals(productId));
+
+            if(productToDelete === -1) {
+                console.log("Producto no encontrado en el carrito indicado");
+                return null;
+            }
+
+            cart.products.splice(productToDelete, 1);
+
+            cart.markModified("products");
+
+            await cart.save();
+            return cart;
+
+
+        } catch (error) {
+            console.error("Error al eliminar el producto del carrito:", error);
+            throw error;   
         }
     }
 }
