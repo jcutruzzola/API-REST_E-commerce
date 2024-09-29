@@ -4,7 +4,7 @@ const socket = io();
 socket.on("productos", (data) => {
     // console.log(data);
 
-    productsRender(data);
+    productsRender(data.docs);
 
 })
 
@@ -22,7 +22,7 @@ const productsRender = products => {
                             <div class="card" style="width: 18rem;">
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">${item.id} - ${item.title}</h5>
+                                    <h5 class="card-title">${item._id} - ${item.title}</h5>
                                     <p class="card-text"> ${item.description}</p>
                                     <p class="card-text"> ${item.price}</p>
                                     <button class="btn btn-primary"> Eliminar </button>
@@ -38,7 +38,7 @@ const productsRender = products => {
         const button = card.querySelector("button");
 
         button.addEventListener("click", () => {
-                deleteProduct(item.id)
+                deleteProduct(item._id)
 
 
         })

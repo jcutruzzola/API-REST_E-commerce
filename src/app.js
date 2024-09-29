@@ -6,9 +6,15 @@ const manager = new ProductManager();
 const productRouter = require("./routes/products.router.js");
 const cartRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
+const userRouter = require("./routes/user.router.js");
 const realTimeProductsRouter = require("./routes/realTimeProducts.router.js");
 const exphbs = require("express-handlebars");
 const socket = require("socket.io");
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
+
+const initializePassport = require("./config/passport.config.js");
+
 require ("./database.js");
 
 
@@ -22,6 +28,9 @@ app.set("views", "./src/views");
 app.use(express.json());  
 app.use(express.static("./src/public"));
 app.use(express.urlencoded( {extended: true}));
+app.use(cookieParser());
+app.use(passport.initialize());
+initializePassport();
 
 
 //Rutas
@@ -29,6 +38,7 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter)
 app.use("/", viewsRouter);
 app.use("/", realTimeProductsRouter);
+app.use("/api/sessions", userRouter)
 
 
 const httpServer = app.listen(PUERTO, () => {
@@ -44,9 +54,7 @@ io.on("connection", async (socket) => {
 
     socket.on("deleteProduct", async (id) => {
         await manager.deleteProduct(id)
-
-
-    io.sockets.emit("productos", await manager.getProducts());
+        io.sockets.emit("productos", await manager.getProducts());
 
     })
 
@@ -58,4 +66,4 @@ io.on("connection", async (socket) => {
         io.sockets.emit("productos", await manager.getProducts());
     })
     
-})
+});
