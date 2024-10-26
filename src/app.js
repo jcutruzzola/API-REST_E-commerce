@@ -1,13 +1,16 @@
 const express = require("express"); 
 const app = express(); 
 const PUERTO = 8080;
+
 const ProductManager = require("./dao/db/product-mananger-db.js");
 const manager = new ProductManager();
 const productRouter = require("./routes/products.router.js");
 const cartRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
+const sessionRouter = require("./routes/session.router.js");
 const realTimeProductsRouter = require("./routes/realTimeProducts.router.js");
+
 const exphbs = require("express-handlebars");
 const socket = require("socket.io");
 const passport = require("passport");
@@ -38,7 +41,9 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter)
 app.use("/", viewsRouter);
 app.use("/", realTimeProductsRouter);
-app.use("/api/sessions", userRouter)
+// app.use("/api/sessions", userRouter)
+app.use("/api/sessions", sessionRouter);
+
 
 
 const httpServer = app.listen(PUERTO, () => {

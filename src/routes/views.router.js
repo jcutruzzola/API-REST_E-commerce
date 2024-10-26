@@ -3,10 +3,12 @@ const router = express.Router();
 const ProductManager = require("../dao/db/product-mananger-db.js");
 const ProductModel = require("../dao/models/product.model.js");
 const CartModel = require("../dao/models/cart.model.js");
+const { onlyAdmin, onlyUser } = require("../middleware/auth.js");
+const passport = require("passport");
 const manager = new ProductManager();
 
 
-router.get("/productos", async (req, res) => {
+router.get("/productos", passport.authenticate("current", {session: false}), onlyUser, async (req, res) => {
 
     const products = await manager.getProducts();
 

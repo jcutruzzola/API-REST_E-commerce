@@ -56,30 +56,6 @@ router.post("/:cid/product/:pid", async (req, res) => {
 })
 
 
-/* 
-
-// Borrar un carrito
-
-router.delete("/:cid", async (req,res) => {
-
-    const cartId= req.params.cid;
-
-    try {
-        
-        await cartManager.deleteCart(cartId);
-
-        res.status(200).send(`Carrito con el id ${cartId} ha sido eliminado`)
-
-    } catch (error) {
-        
-        res.status(500).send("No se pudo eliminar el carrito");
-    }
-});
-
-
- */
-
-
 // Borrar todos los productos del carrito
 
 router.delete("/:cid", async (req, res) => {
@@ -154,5 +130,9 @@ router.put("/:cid/products/:pid", async (req, res) => {
 
 });
 
+
+// Compra finalizasda route
+
+router.post("/:cid/purchase", async (req, res) => {})
 
 module.exports = router;

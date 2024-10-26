@@ -1,10 +1,9 @@
 <h1>Esto es profile</h1>
 
 
-<h3>Nombre: {{user.first_name}}</h3>
-<h3>Apellido: {{user.last_name}}</h3>
-<h6>Edad: {{user.age}}</h6>
+<h3>Usuario: {{user.user}}</h3>
 <h6>Email: {{user.email}}</h6>
+<h6>Tipo: {{user.role}}</h6>
 
 <form action="/api/sessions/logout" method="POST">
     <button type="submit"> Cerrar Sesión </button>
