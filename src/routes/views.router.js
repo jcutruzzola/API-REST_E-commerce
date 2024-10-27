@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const ProductManager = require("../dao/db/product-mananger-db.js");
-const ProductModel = require("../dao/models/product.model.js");
-const CartModel = require("../dao/models/cart.model.js");
+// const ProductManager = require("../dao/db/product-mananger-db.js");
+// const ProductModel = require("../dao/models/product.model.js");
+// const CartModel = require("../dao/models/cart.model.js");
 const { onlyAdmin, onlyUser } = require("../middleware/auth.js");
 const passport = require("passport");
 // const manager = new ProductManager();
 const ProductService = require ("../services/product.service.js");
+const CartService = require("../services/cart.service.js");
 
 
 router.get("/products", passport.authenticate("current", {session: false}), onlyUser, async (req, res) => {
@@ -38,6 +39,21 @@ router.get("/products", passport.authenticate("current", {session: false}), only
 
 
 router.get("/carts/:cid", async (req, res) => {
+    const cartId = req.params.cid;
+
+    try {
+        const cart = await CartService.getCartById(cartId).populate("products.product").lean();
+        if(!cart) return res.status(404).send("carrito no encontrado");
+
+        res.render("carts", {cart: cart});
+
+    } catch (error) {
+        res.status(404).json({error});
+    }
+})
+
+
+/* router.get("/carts/:cid", async (req, res) => {
 
     const cartId = req.params.cid;
 
@@ -58,7 +74,7 @@ router.get("/carts/:cid", async (req, res) => {
         console.error("Error al buscar el carrito:", error);
         res.status(500).send("Error interno del servidor");
     }
-});
+}); */
 
 
 router.get("/register", (req, res) => {
