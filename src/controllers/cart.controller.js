@@ -1,8 +1,11 @@
 const cartService = require("../services/cart.service.js");
 const productService = require("../services/product.service.js");
 const userService = require("../services/user.service.js");
+const UserModel = require("../dao/models/user.model.js");
 const TicketModel = require("../dao/models/ticket.model.js");
-const { ConnectionStates } = require("mongoose");
+const { totalCalc, randomCode } = require("../utils/cartUtils.js");
+// const cryptoRandomString = require("crypto-random-string");
+
 // import cryptoRandomString from "crypto-random-string";
 
 class CartController{
@@ -109,52 +112,52 @@ class CartController{
 
     async finishPurchase(req, res){
         const cartId = req.params.cid;
-        
-        let total = 0;
 
         try {
-            
-            const cart = await cartService.getCartById(cartId);
 
+            const cart = await cartService.getCartById(cartId);
             if(!cart) return res.status(404).send("Carrito no encontrado");
 
             const products = cart.products;
-            const productsOutOfStock = [];
+
+            const notAvailableProducts = [];
 
             for(const item of products){
                 const productId = item.product;
                 const product = await productService.getProductById(productId);
+
+            
                 if(product.stock >= item.quantity){
                     product.stock -= item.quantity;
                     await product.save();
                 } else {
-                    productsOutOfStock.push(productId);
+                    notAvailableProducts.push(productId);
                 }
             }
 
             const userWcart = await userService.getUserByQuery({ cart: cartId });
-            
+            // const userWcart = await UserModel.findOne({cart: cartId});
+        
+
             const ticket = new TicketModel({
-                code: cryptoRandomString({length: 12}) || 1,
-                purchase_datetime,
-                amount: total,
-                purchaser: userWcart.email
+                code: randomCode(10),
+                purchase_datetime: new Date(),
+                amount: totalCalc(cart.products),
+                purchaser: userWcart._id
             });
 
             await ticket.save();
 
-            cart.products = cart.products.filter( item => productsOutOfStock.some(pid => pid.equals(item.product)));
+            cart.products = cart.products.filter( item => notAvailableProducts.some(pid => pid.equals(item.product)));
 
             await cart.save();
 
-            console.log(`cart products: ${cart.products}`);
-            console.log(`No disponibles: ${productsOutOfStock}`);
-
-            res.render("checkout", {user:`${userWcart.first_name, userWcart.last_name}`, email: userWcart.email, ticketNumber: ticket._id});
+            res.json( {user: userWcart.first_name, email: userWcart.email, ticketNumber: ticket._id, date: ticket.purchase_datetime});
 
             
         } catch (error) {
-            res.status(500).send("Error al procesar el pedido");
+            console.error("Error al procesar el pedido ", error);
+            res.status(500).json({ error: "Error interno del servidor"});
         }
     }
 
