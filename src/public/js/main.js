@@ -2,12 +2,28 @@ const socket = io();
 
 
 socket.on("productos", (data) => {
-    // console.log(data);
+    console.log(data);
 
-    productsRender(data.docs);
+    productsRender(data);
+    // productsData(data);
 
 })
 
+/* const productsData = products => {
+    const data =  {
+        hasNextPage: products.hasNextPage,
+        hasPrevPage: products.hasPrevPage,
+        limit: products.limit,
+        nextPage: products.nextPage,
+        prevPage: products.prevPage,
+        totalPages: products.prevPage
+    }
+
+    console.log(data);
+
+    return data;
+
+} */
 
 const productsRender = products => {
     const productsContainer = document.getElementById("products-container");
@@ -22,9 +38,10 @@ const productsRender = products => {
                             <div class="card" style="width: 18rem;">
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">${item._id} - ${item.title}</h5>
+                                    <h5 class="card-title">${item.title}</h5>
                                     <p class="card-text"> ${item.description}</p>
-                                    <p class="card-text"> ${item.price}</p>
+                                    <p class="card-text"> $${item.price}</p>
+                                    <p class="card-text"> ID: ${item._id}</p>
                                     <button class="btn btn-primary"> Eliminar </button>
                                 </div>
                              </div>

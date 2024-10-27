@@ -10,6 +10,7 @@ router.post("/", controller.newCart);
 router.get("/:cid", controller.getCart);
 router.post("/:cid/products/:pid", controller.addProducts);
 router.delete("/:cid", controller.emptyCart);
+router.delete("/:cid/product/:pid", controller.deleteProduct);
 router.post("/:cid/purchase", controller.finishPurchase);
 
 

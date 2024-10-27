@@ -2,7 +2,7 @@
 
 <h2>Listado de productos</h2>
 
-<div class="containerProducts d-flex flex-column ">
+<div class="container containerProducts d-inline-flex p-3 justify-content-between">
     
     {{#each products}}
 
@@ -11,25 +11,26 @@
             <p> {{this.title}} </p>
             <p> {{this.description}} </p>
             <p> {{this.price}} </p>
-            <button type="button" class="btn btn-primary btn-sm"> Agregar al Carrito </button>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-addToCart"> Agregar al Carrito </button>
 
         </div>
 
     {{/each}}
 
+</div>
 
+<div>
     {{#if hasPrevPage}}
-        <a href="/productos?page={{prevPage}}"> Anterior </a>
+        <a href="/products?page={{prevPage}}"> Anterior </a>
     {{/if}}
 
 
     {{#if hasNextPage}}
 
-    <a href="/productos?page={{nextPage}}"> Siguiente </a>
+    <a href="/products?page={{nextPage}}"> Siguiente </a>
 
     {{/if}}
 
 
 <p> {{currentPage}} de {{totalPages}}</p>
-
 </div>

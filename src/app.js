@@ -2,12 +2,12 @@ const express = require("express");
 const app = express(); 
 const PUERTO = 8080;
 
-const ProductManager = require("./dao/db/product-mananger-db.js");
-const manager = new ProductManager();
-const productRouter = require("./routes/products.router.js");
-const cartRouter = require("./routes/carts.router.js");
+// const ProductManager = require("./dao/db/product-mananger-db.js");
+// const manager = new ProductManager();
+const productRouter = require("./routes/product.router.js");
+const cartRouter = require("./routes/cart.router.js");
 const viewsRouter = require("./routes/views.router.js");
-const userRouter = require("./routes/user.router.js");
+// const userRouter = require("./routes/user.router.js");
 const sessionRouter = require("./routes/session.router.js");
 const realTimeProductsRouter = require("./routes/realTimeProducts.router.js");
 
@@ -40,19 +40,25 @@ initializePassport();
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter)
 app.use("/", viewsRouter);
+app.use("/api/sessions", sessionRouter);
 app.use("/", realTimeProductsRouter);
 // app.use("/api/sessions", userRouter)
-app.use("/api/sessions", sessionRouter);
 
 
 
 const httpServer = app.listen(PUERTO, () => {
     console.log(`Escuchando en el http://localhost:${PUERTO}`); 
-})
+});
 
-const io = socket(httpServer);
+module.exports = httpServer;
 
-io.on("connection", async (socket) => {
+const socketIo = require("./utils/socket.js");
+socketIo();
+
+
+// const io = socket(httpServer);
+
+/* io.on("connection", async (socket) => {
     console.log("conectado ok");
 
     socket.emit("productos", await manager.getProducts());
@@ -71,4 +77,4 @@ io.on("connection", async (socket) => {
         io.sockets.emit("productos", await manager.getProducts());
     })
     
-});
+}); */

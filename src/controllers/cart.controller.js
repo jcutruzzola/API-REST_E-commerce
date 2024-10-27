@@ -2,7 +2,8 @@ const cartService = require("../services/cart.service.js");
 const productService = require("../services/product.service.js");
 const userService = require("../services/user.service.js");
 const TicketModel = require("../dao/models/ticket.model.js");
-const cryptoRandomString = require("crypto-random-string");
+const { ConnectionStates } = require("mongoose");
+// import cryptoRandomString from "crypto-random-string";
 
 class CartController{
 
@@ -10,6 +11,7 @@ class CartController{
         try {
             const newCart = await cartService.createCart();
             res.status(201).json(newCart);
+
         } catch (error) {
             res.status(500).send("Error al crear nuevo carrito ", error);
         }
@@ -58,15 +60,16 @@ class CartController{
         const cartId = req.params.cid;
 
         try {
-            const cart = await cartService.getCartById(id);
+           const cart = await cartService.getCartById(cartId);
 
             if(cart && cart.products.length > 0){
-                cart = []; 
+                cart.products = []; 
+            //    return cart.save()
 
                 return await cartService.updateCart(cartId, cart);
             }
 
-            res.status(201).send("Productos eliminados del carrito").json(cart);
+            res.status(201).send("Productos eliminados del carrito");
 
         } catch (error) {
 
@@ -84,16 +87,20 @@ class CartController{
             const cart = await cartService.getCartById(cartId);
             if(!cart) return res.status(404).send("Carrito no encontrado");
 
-            const productDelete = cart.products.findIndex( i => i.product._id.equals(productId));
-            if(!productDelete) return res.status(404).send("Producto no encontrado en el carrito");
+            console.log(cart);
+
+            const productDelete = cart.products.findIndex( i => i.product._id.toString() === productId);
+            if(productDelete === -1) return res.status(404).send("Producto no encontrado en el carrito");
 
             cart.products.splice(productDelete, 1);
 
+            await cart.save();
             cart.markModified("products");
 
-           
+            res.status(200).send("Producto eliminado correctamente");
+
         } catch (error) {
-            res.status(500).send("Error al eliminar producto del carrito", error);
+            res.status(500).send("Error al eliminar producto del carrito");
             
         }
 
@@ -106,6 +113,7 @@ class CartController{
         let total = 0;
 
         try {
+            
             const cart = await cartService.getCartById(cartId);
 
             if(!cart) return res.status(404).send("Carrito no encontrado");
@@ -127,7 +135,7 @@ class CartController{
             const userWcart = await userService.getUserByQuery({ cart: cartId });
             
             const ticket = new TicketModel({
-                code: cryptoRandomString({length: 12}) || null,
+                code: cryptoRandomString({length: 12}) || 1,
                 purchase_datetime,
                 amount: total,
                 purchaser: userWcart.email

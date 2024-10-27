@@ -5,24 +5,22 @@ const ProductModel = require("../dao/models/product.model.js");
 const CartModel = require("../dao/models/cart.model.js");
 const { onlyAdmin, onlyUser } = require("../middleware/auth.js");
 const passport = require("passport");
-const manager = new ProductManager();
+// const manager = new ProductManager();
+const ProductService = require ("../services/product.service.js");
 
 
-router.get("/productos", passport.authenticate("current", {session: false}), onlyUser, async (req, res) => {
-
-    const products = await manager.getProducts();
+router.get("/products", passport.authenticate("current", {session: false}), onlyUser, async (req, res) => {
 
     let page = req.query.page || 1;
     let limit = req.query.limit || 4;
 
-    const listProducts = await ProductModel.paginate({}, {limit, page});
+    const listProducts = await ProductService.paginateProducts({}, {page, limit});
 
     const productsList = listProducts.docs.map( item => {
         const {_id, ...rest } = item.toObject();
         return rest;
 
     });
-
 
     res.render("home", {
         

@@ -16,9 +16,14 @@ h2 {
 
 }
 
+.containerProducts{
+    width: 75vw;
+
+
+}
 
 #products-container {
-    width: 700px;
+    width: 50vw;
 
 
 }
