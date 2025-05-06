@@ -19,12 +19,6 @@ Este proyecto es una API RESTful desarrollada con **Node.js** y **Express** que 
 
 /src ├── routes/ │ ├── product.router.js │ ├── cart.router.js │ ├── views.router.js │ ├── session.router.js │ └── realTimeProducts.router.js ├── views/ ← Vistas Handlebars ├── public/ ← Archivos estáticos ├── config/ │ └── passport.config.js ├── dao/ ← Lógica de persistencia (comentada) ├── utils/ │ └── socket.js ← Configuración WebSocket └── database.js ← Conexión a base de datos MongoDB
 
-index.js
-
-markdown
-Copy
-Edit
-
 ---
 
 ## 🧩 Funcionalidades principales
